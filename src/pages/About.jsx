@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Sidebar } from "../components/ui/Sidebar";
-import { Instagram, Facebook, Linkedin, Youtube, Twitter } from "lucide-react";
+import { Instagram, Facebook, Linkedin, Youtube, Twitter, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaRobot, FaCode, FaMobileAlt, FaCloud, FaFlask } from "react-icons/fa";
 import "aos/dist/aos.css";
 import AOS from "aos";
@@ -54,8 +54,8 @@ const FooterLinkSection = ({ title, links }) => {
   );
 };
 
-// Animated Text Component
-const AnimatedText = ({ children }) => {
+// Simple Text Component (without line - removed the line as requested)
+const SimpleText = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const textRef = useRef(null);
 
@@ -90,12 +90,6 @@ const AnimatedText = ({ children }) => {
       >
         {children}
       </h1>
-      <div 
-        className={`absolute bottom-0 left-0 h-1 bg-orange-500 transition-all duration-1000 ${
-          isVisible ? "w-full opacity-100" : "w-0 opacity-0"
-        }`}
-        style={{ transitionDelay: "0.3s" }}
-      ></div>
     </div>
   );
 };
@@ -285,16 +279,16 @@ const AboutPage = () => {
     updateCardsPosition();
   };
 
-  const dynamicBgColor = `linear-gradient(to bottom, 
-    rgb(255, 235, 204) ${100 - scrollProgress * 50}%, 
-    rgb(255, 165, 0) ${scrollProgress * 100}%)`;
+  // Updated gradient background - pure orange gradient
+  const backgroundGradient = `linear-gradient(135deg, 
+    #FF9800, #FF5722, #FF9800)`;
 
   return (
     <div className="relative min-h-screen font-poppins">
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
       
       {/* Gradient background */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0" style={{ background: dynamicBgColor }} />
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0" style={{ background: backgroundGradient }} />
       
       <Sidebar />
       <div className="relative z-10 p-5 max-w-6xl mx-auto">
@@ -315,8 +309,8 @@ const AboutPage = () => {
           <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-20">
             <div className="w-full md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
               <div className="mb-8">
-                <AnimatedText>Turning Concepts</AnimatedText>
-                <AnimatedText>into Reality</AnimatedText>
+                <SimpleText>Turning Concepts</SimpleText>
+                <SimpleText>into Reality</SimpleText>
               </div>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -352,7 +346,7 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
               <motion.div 
                 whileHover={{ y: -10 }}
-                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300"
+                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 relative group"
               >
                 <img
                   className="w-full h-64 object-cover object-center"
@@ -363,11 +357,19 @@ const AboutPage = () => {
                   <h3 className="text-2xl font-bold text-gray-800">Sanket Palkar</h3>
                   <p className="text-orange-600 font-medium">President</p>
                 </div>
+                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                    <Instagram size={18} />
+                  </a>
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                    <Linkedin size={18} />
+                  </a>
+                </div>
               </motion.div>
 
               <motion.div 
                 whileHover={{ y: -10 }}
-                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300"
+                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 relative group"
               >
                 <img
                   className="w-full h-64 object-cover object-center"
@@ -378,11 +380,19 @@ const AboutPage = () => {
                   <h3 className="text-2xl font-bold text-gray-800">Pranit Chilbule</h3>
                   <p className="text-orange-600 font-medium">Tech Lead</p>
                 </div>
+                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                    <Instagram size={18} />
+                  </a>
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                    <Linkedin size={18} />
+                  </a>
+                </div>
               </motion.div>
 
               <motion.div 
                 whileHover={{ y: -10 }}
-                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300"
+                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 relative group"
               >
                 <img
                   className="w-full h-64 object-cover object-center"
@@ -393,13 +403,21 @@ const AboutPage = () => {
                   <h3 className="text-2xl font-bold text-gray-800">Rajnandini Dharashive</h3>
                   <p className="text-orange-600 font-medium">Tech Lead</p>
                 </div>
+                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                    <Instagram size={18} />
+                  </a>
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                    <Linkedin size={18} />
+                  </a>
+                </div>
               </motion.div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6" data-aos="fade-up" data-aos-delay="300">
               <motion.div 
                 whileHover={{ y: -10 }}
-                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300"
+                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 relative group"
               >
                 <img
                   className="w-full h-64 object-cover object-center"
@@ -410,11 +428,19 @@ const AboutPage = () => {
                   <h3 className="text-2xl font-bold text-gray-800">Vikas Doifode</h3>
                   <p className="text-orange-600 font-medium">Web Head</p>
                 </div>
+                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                    <Instagram size={18} />
+                  </a>
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                    <Linkedin size={18} />
+                  </a>
+                </div>
               </motion.div>
 
               <motion.div 
                 whileHover={{ y: -10 }}
-                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300"
+                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 relative group"
               >
                 <div className="w-full h-64 bg-gray-200 flex items-center justify-center">
                   <span className="text-gray-500">No Image Available</span>
@@ -423,11 +449,19 @@ const AboutPage = () => {
                   <h3 className="text-2xl font-bold text-gray-800">Ved Thorat</h3>
                   <p className="text-orange-600 font-medium">AI Head</p>
                 </div>
+                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                    <Instagram size={18} />
+                  </a>
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                    <Linkedin size={18} />
+                  </a>
+                </div>
               </motion.div>
 
               <motion.div 
                 whileHover={{ y: -10 }}
-                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300"
+                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 relative group"
               >
                 <img
                   className="w-full h-64 object-cover object-center"
@@ -438,13 +472,21 @@ const AboutPage = () => {
                   <h3 className="text-2xl font-bold text-gray-800">Mandar Deotale</h3>
                   <p className="text-orange-600 font-medium">App Dev Head</p>
                 </div>
+                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                    <Instagram size={18} />
+                  </a>
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                    <Linkedin size={18} />
+                  </a>
+                </div>
               </motion.div>
             </div>
             
             <div className="flex justify-center mt-6" data-aos="fade-up" data-aos-delay="400">
               <motion.div 
                 whileHover={{ y: -10 }}
-                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 w-full md:w-1/3"
+                className="card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 w-full md:w-1/3 relative group"
               >
                 <img
                   className="w-full h-64 object-cover object-center"
@@ -454,6 +496,14 @@ const AboutPage = () => {
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-gray-800">Darshan Atkari</h3>
                   <p className="text-orange-600 font-medium">Cloud Head</p>
+                </div>
+                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                    <Instagram size={18} />
+                  </a>
+                  <a href="#" className="bg-white/80 rounded-full p-2 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                    <Linkedin size={18} />
+                  </a>
                 </div>
               </motion.div>
             </div>
@@ -510,7 +560,7 @@ const AboutPage = () => {
                   show: { opacity: 1, y: 0 }
                 }}
                 className={`domain-option flex flex-col items-center justify-center bg-black border-2 border-orange-500 text-orange-500 font-bold py-3 px-6 rounded-lg cursor-pointer transition-all duration-300 hover:bg-orange-500 hover:text-black hover:scale-105 ${
-                  currentDomain === "ai" ? "bg-orange-500 text-black scale-105" : ""
+                  currentDomain === "ai" ? "bg-orange-500 !text-black scale-105" : ""
                 }`}
                 onClick={() => setCurrentDomain("ai")}
               >
@@ -524,7 +574,7 @@ const AboutPage = () => {
                   show: { opacity: 1, y: 0 }
                 }}
                 className={`domain-option flex flex-col items-center justify-center bg-black border-2 border-orange-500 text-orange-500 font-bold py-3 px-6 rounded-lg cursor-pointer transition-all duration-300 hover:bg-orange-500 hover:text-black hover:scale-105 ${
-                  currentDomain === "webdev" ? "bg-orange-500 text-black scale-105" : ""
+                  currentDomain === "webdev" ? "bg-orange-500 !text-black scale-105" : ""
                 }`}
                 onClick={() => setCurrentDomain("webdev")}
               >
@@ -538,7 +588,7 @@ const AboutPage = () => {
                   show: { opacity: 1, y: 0 }
                 }}
                 className={`domain-option flex flex-col items-center justify-center bg-black border-2 border-orange-500 text-orange-500 font-bold py-3 px-6 rounded-lg cursor-pointer transition-all duration-300 hover:bg-orange-500 hover:text-black hover:scale-105 ${
-                  currentDomain === "appdev" ? "bg-orange-500 text-black scale-105" : ""
+                  currentDomain === "appdev" ? "bg-orange-500 !text-black scale-105" : ""
                 }`}
                 onClick={() => setCurrentDomain("appdev")}
               >
@@ -552,7 +602,7 @@ const AboutPage = () => {
                   show: { opacity: 1, y: 0 }
                 }}
                 className={`domain-option flex flex-col items-center justify-center bg-black border-2 border-orange-500 text-orange-500 font-bold py-3 px-6 rounded-lg cursor-pointer transition-all duration-300 hover:bg-orange-500 hover:text-black hover:scale-105 ${
-                  currentDomain === "cloud" ? "bg-orange-500 text-black scale-105" : ""
+                  currentDomain === "cloud" ? "bg-orange-500 !text-black scale-105" : ""
                 }`}
                 onClick={() => setCurrentDomain("cloud")}
               >
@@ -566,7 +616,7 @@ const AboutPage = () => {
                   show: { opacity: 1, y: 0 }
                 }}
                 className={`domain-option flex flex-col items-center justify-center bg-black border-2 border-orange-500 text-orange-500 font-bold py-3 px-6 rounded-lg cursor-pointer transition-all duration-300 hover:bg-orange-500 hover:text-black hover:scale-105 ${
-                  currentDomain === "rd" ? "bg-orange-500 text-black scale-105" : ""
+                  currentDomain === "rd" ? "bg-orange-500 !text-black scale-105" : ""
                 }`}
                 onClick={() => setCurrentDomain("rd")}
               >
@@ -575,228 +625,161 @@ const AboutPage = () => {
               </motion.div>
             </motion.div>
 
-            <div
-              className={`max-w-4xl mx-auto relative mt-12 ${
-                currentDomain ? "" : "hidden"
-              }`}
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <button
-                className="domain-nav-btn absolute left-0 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-600 transition-all duration-300 shadow-lg z-10"
-                aria-label="Previous"
-                onClick={() => navigateCards("prev")}
-              >
-                <span className="sr-only">Previous</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-
-              <div className="domain-cards-wrapper overflow-hidden mx-12 relative">
-                <div
-                  className="domain-cards flex transition-transform duration-500 ease-out"
-                  ref={cardsEl}
-                >
-                  {/* Cards will be added dynamically */}
+            {currentDomain && (
+              <div className="mt-16 relative" data-aos="fade-up">
+                <h3 className="text-2xl font-bold text-center mb-6">
+                  {currentDomain === "ai" && "AI Team"}
+                  {currentDomain === "webdev" && "Web Development Team"}
+                  {currentDomain === "appdev" && "App Development Team"}
+                  {currentDomain === "cloud" && "Cloud Team"}
+                  {currentDomain === "rd" && "Research & Development Team"}
+                </h3>
+                
+                <div className="flex items-center justify-center mb-6">
+                  <button
+                    className="bg-black text-orange-500 hover:bg-orange-500 hover:text-black p-3 rounded-full shadow-lg mr-4 transform transition-all duration-300 focus:outline-none flex items-center justify-center"
+                    onClick={() => navigateCards("prev")}
+                    disabled={currentIndex === 0}
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                  
+                  <div className="overflow-hidden w-full max-w-4xl">
+                    <div
+                      ref={cardsEl}
+                      className="flex transition-transform duration-500 ease-in-out"
+                    ></div>
+                  </div>
+                  
+                  <button
+                    className="bg-black text-orange-500 hover:bg-orange-500 hover:text-black p-3 rounded-full shadow-lg ml-4 transform transition-all duration-300 focus:outline-none flex items-center justify-center"
+                    onClick={() => navigateCards("next")}
+                    disabled={currentIndex >= totalItems - visibleCards}
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </div>
+                
+                <div className="flex justify-center items-center mt-4">
+                  <div
+                    ref={indicatorsContainer}
+                    className="flex space-x-2"
+                  ></div>
                 </div>
               </div>
-
-              <button
-                className="domain-nav-btn absolute right-0 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-600 transition-all duration-300 shadow-lg z-10"
-                aria-label="Next"
-                onClick={() => navigateCards("next")}
-              >
-                <span className="sr-only">Next</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-
-            <div className="flex justify-center mt-4" ref={indicatorsContainer}>
-              {/* Indicators will be added dynamically */}
-            </div>
+            )}
           </div>
           
-          <div className="my-20" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Testimonials</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="mt-20">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Our Values</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="200">
               <motion.div 
                 whileHover={{ scale: 1.03 }}
-                className="bg-white/40 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/20"
+                className="p-6 bg-white/30 backdrop-blur-sm rounded-xl shadow-lg border border-white/10"
               >
-                <div className="flex items-start mb-4">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
-                      <span className="text-orange-500 text-xl font-bold">S</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg">Saisha Patil</h3>
-                    <p className="text-gray-600 text-sm">Computer Science Student</p>
-                  </div>
-                </div>
-                <p className="text-gray-700">
-                  "InnovSphere's workshops completely transformed my approach to programming. The hands-on projects and supportive community helped me gain confidence and technical skills I couldn't get in regular classes."
+                <h3 className="text-2xl font-bold text-orange-500 mb-3">Innovation</h3>
+                <p className="text-gray-800">
+                  We're committed to exploring new ideas and technologies, pushing boundaries and thinking outside the box. 
+                  InnovSphere encourages creative problem-solving and cutting-edge solutions.
                 </p>
               </motion.div>
               
               <motion.div 
                 whileHover={{ scale: 1.03 }}
-                className="bg-white/40 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/20"
+                className="p-6 bg-white/30 backdrop-blur-sm rounded-xl shadow-lg border border-white/10"
               >
-                <div className="flex items-start mb-4">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
-                      <span className="text-orange-500 text-xl font-bold">A</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg">Aarav Mehta</h3>
-                    <p className="text-gray-600 text-sm">IT Engineering Student</p>
-                  </div>
-                </div>
-                <p className="text-gray-700">
-                  "Being part of InnovSphere's AI domain helped me apply theoretical concepts to real projects. The mentorship I received from senior members was invaluable and eventually led to my first internship."
+                <h3 className="text-2xl font-bold text-orange-500 mb-3">Collaboration</h3>
+                <p className="text-gray-800">
+                  We believe in the power of teamwork. By bringing together diverse skills and perspectives, 
+                  we create a supportive environment where knowledge is shared freely.
                 </p>
               </motion.div>
-            </div>
-          </div>
-          
-          <div className="my-20" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Contact Us</h2>
-            
-            <div className="bg-white/30 backdrop-blur-sm rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                      placeholder="Your email"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">Subject</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    placeholder="Subject"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Message</label>
-                  <textarea
-                    id="message"
-                    rows="4"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    placeholder="Your message"
-                  ></textarea>
-                </div>
-                
-                <div>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    type="submit"
-                    className="w-full bg-orange-500 text-white py-3 px-6 rounded-lg font-medium hover:bg-orange-600 transition-all duration-300 shadow-lg"
-                  >
-                    Send Message
-                  </motion.button>
-                </div>
-              </form>
+              
+              <motion.div 
+                whileHover={{ scale: 1.03 }}
+                className="p-6 bg-white/30 backdrop-blur-sm rounded-xl shadow-lg border border-white/10"
+              >
+                <h3 className="text-2xl font-bold text-orange-500 mb-3">Excellence</h3>
+                <p className="text-gray-800">
+                  We strive for technical excellence in everything we do. Quality code, robust solutions,
+                  and attention to detail are hallmarks of our approach to technology.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                whileHover={{ scale: 1.03 }}
+                className="p-6 bg-white/30 backdrop-blur-sm rounded-xl shadow-lg border border-white/10"
+              >
+                <h3 className="text-2xl font-bold text-orange-500 mb-3">Growth</h3>
+                <p className="text-gray-800">
+                  We're dedicated to continuous learning and skill development. InnovSphere is a place
+                  where members can experiment, fail, learn, and ultimately grow into better technologists.
+                </p>
+              </motion.div>
             </div>
           </div>
         </div>
       </div>
       
-      <footer className="relative z-10 bg-gray-900 text-white pt-16 pb-8">
-        <div className="max-w-6xl mx-auto px-5">
-          <div className="flex flex-col md:flex-row justify-between mb-12">
-            <div className="mb-10 md:mb-0 md:w-1/3">
-              <div className="flex items-center text-2xl font-bold text-white mb-6">
+      {/* Footer */}
+      <footer className="relative z-10 bg-gray-900 text-white pt-16 pb-8 mt-20">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap">
+            <div className="w-full md:w-1/3 mb-8 md:mb-0">
+              <div className="flex items-center mb-6">
                 <img src="logo.png" alt="InnovSphere Logo" className="w-10 h-10 mr-3" />
-                InnovSphere
+                <h2 className="text-2xl font-bold text-orange-500">InnovSphere</h2>
               </div>
-              <p className="text-gray-400 mb-6">
-                Empowering students to innovate, collaborate, and excel in the ever-evolving tech landscape through hands-on learning and real-world projects.
+              <p className="text-gray-400 mb-8 pr-4">
+                Empowering the next generation of tech innovators through collaboration, 
+                learning, and hands-on project experience.
               </p>
               <div className="flex space-x-3">
-                <SocialIcon icon={<Instagram size={18} />} tooltip="Instagram" hoverColor="bg-gradient-to-tr from-purple-600 to-pink-500" />
-                <SocialIcon icon={<Facebook size={18} />} tooltip="Facebook" hoverColor="bg-blue-600" />
-                <SocialIcon icon={<Linkedin size={18} />} tooltip="LinkedIn" hoverColor="bg-blue-700" />
-                <SocialIcon icon={<Youtube size={18} />} tooltip="YouTube" hoverColor="bg-red-600" />
-                <SocialIcon icon={<Twitter size={18} />} tooltip="Twitter" hoverColor="bg-blue-400" />
+                <SocialIcon icon={<Instagram size={20} />} tooltip="Instagram" hoverColor="bg-gradient-to-r from-purple-500 to-pink-500" />
+                <SocialIcon icon={<Linkedin size={20} />} tooltip="LinkedIn" hoverColor="bg-blue-600" />
+                <SocialIcon icon={<Twitter size={20} />} tooltip="Twitter" hoverColor="bg-sky-500" />
+                <SocialIcon icon={<Youtube size={20} />} tooltip="YouTube" hoverColor="bg-red-600" />
               </div>
             </div>
             
-            <div className="flex flex-wrap md:w-3/5">
-              <FooterLinkSection 
-                title="Quick Links" 
-                links={[
-                  { label: "Home", href: "/" },
-                  { label: "About", href: "/about" },
-                  { label: "Events", href: "/events" },
-                  { label: "Projects", href: "/projects" },
-                  { label: "Contact", href: "/contact" }
-                ]}
-              />
-              
-              <FooterLinkSection 
-                title="Domains" 
-                links={[
-                  { label: "Artificial Intelligence", href: "/domains/ai" },
-                  { label: "Web Development", href: "/domains/webdev" },
-                  { label: "App Development", href: "/domains/appdev" },
-                  { label: "Cloud Computing", href: "/domains/cloud" },
-                  { label: "Research & Development", href: "/domains/research" }
-                ]}
-              />
-              
-              <FooterLinkSection 
-                title="Resources" 
-                links={[
-                  { label: "Blog", href: "/blog" },
-                  { label: "Workshops", href: "/workshops" },
-                  { label: "Tutorials", href: "/tutorials" },
-                  { label: "FAQs", href: "/faqs" },
-                  { label: "Join Us", href: "/join" }
-                ]}
-              />
-            </div>
+            <FooterLinkSection 
+              title="Quick Links"
+              links={[
+                { label: "Home", href: "#" },
+                { label: "About Us", href: "#" },
+                { label: "Events", href: "#" },
+                { label: "Projects", href: "#" },
+                { label: "Gallery", href: "#" },
+              ]}
+            />
+            
+            <FooterLinkSection 
+              title="Our Domains"
+              links={[
+                { label: "Artificial Intelligence", href: "#" },
+                { label: "Web Development", href: "#" },
+                { label: "App Development", href: "#" },
+                { label: "Cloud Computing", href: "#" },
+                { label: "Research & Development", href: "#" },
+              ]}
+            />
           </div>
           
-          <div className="border-t border-gray-800 pt-8 mt-8">
+          <div className="border-t border-gray-800 mt-12 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-sm mb-4 md:mb-0">
-                &copy; {new Date().getFullYear()} InnovSphere. All rights reserved.
+              <p className="text-sm text-gray-500 mb-4 md:mb-0">
+                © {new Date().getFullYear()} InnovSphere. All rights reserved.
               </p>
               <div className="flex space-x-6">
-                <a href="/privacy" className="text-gray-400 hover:text-orange-500 text-sm transition-colors duration-300">Privacy Policy</a>
-                <a href="/terms" className="text-gray-400 hover:text-orange-500 text-sm transition-colors duration-300">Terms of Service</a>
-                <a href="/cookies" className="text-gray-400 hover:text-orange-500 text-sm transition-colors duration-300">Cookie Policy</a>
+                <a href="#" className="text-sm text-gray-500 hover:text-orange-500 transition-colors duration-300">Privacy Policy</a>
+                <a href="#" className="text-sm text-gray-500 hover:text-orange-500 transition-colors duration-300">Terms of Service</a>
               </div>
             </div>
           </div>
         </div>
+        
+        {/* Scroll progress bar */}
+        <div className="fixed bottom-0 left-0 h-1 bg-orange-500 z-50" style={{ width: `${scrollProgress * 100}%` }}></div>
       </footer>
     </div>
   );
