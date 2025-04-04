@@ -11,8 +11,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Observer } from 'gsap/Observer';
 import { SplashCursor } from '@/components/ui/splash-cursor';
-import AnimatedText from '../components/ui/AnimatedText'; // Ensure this is imported
-
+import AnimatedText from '../components/ui/AnimatedText'; 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, Observer);
